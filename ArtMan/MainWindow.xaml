@@ -1,0 +1,230 @@
+﻿<Window x:Class="ArtMan.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArtMan"
+        xmlns:Core="clr-namespace:ArtMan.Core"
+        xmlns:controls="clr-namespace:ArtMan.Forms.Controls"
+        xmlns:coverters="clr-namespace:ArtMan.Forms.Converters"
+        xmlns:BusinessObjects="clr-namespace:ArtMan.DataObjects"
+        mc:Ignorable="d"
+        Title="ArtMan v1.0" 
+        Height="600" Width="800"
+        ResizeMode="CanResizeWithGrip" 
+        WindowStartupLocation="Manual" 
+        WindowState="Normal"
+        MouseDown="MainWindow_OnMouseDown"
+        x:Name="_form">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <coverters:BoolToStringConverter x:Key="BoolToStringConverter"></coverters:BoolToStringConverter>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="New" Executed="NewCommandBinding_Executed" />
+        <CommandBinding Command="Open" Executed="OpenCommandBinding_Executed" />
+        <!--<CommandBinding Command="Save" Executed="SaveCommandBinding_Executed" />-->
+        <CommandBinding Command="Refresh" Executed="RefreshCommandBinding_Executed" />
+        <!--<CommandBinding Command="Play" Executed="PlayCommandBinding_Executed" />-->
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Control" Command="New"/>
+        <KeyBinding Key="F4" Command="Open"/>
+        <!--<KeyBinding Key="S" Modifiers="Control" Command="Save"/>-->
+        <KeyBinding Key="F5" Command="Refresh"/>
+        <!--<KeyBinding Key="F5" Command="Play"/>-->
+    </Window.InputBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Menu -->
+            <RowDefinition Height="24" />
+
+            <!-- Data grid filter -->
+            <RowDefinition Height="Auto" />
+
+            <!-- Data grid -->
+            <RowDefinition Height="*" />
+
+            <!-- Data grid buttons -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem x:Name="FileMenu" Header="Soubor">
+                <MenuItem Header="Nové dílo..." InputGestureText="Ctrl+N" Click="NewArtMenuItem_OnClick" />
+                <MenuItem Header="Upravit dílo(a)..." InputGestureText="F4" Click="EditArtMenuItem_OnClick" />
+                <!--<MenuItem Header="Load analysis..." InputGestureText="Ctrl+O" Click="LoadAnalysisMenuItem_OnClick" />
+                <MenuItem Header="Save analysis..." InputGestureText="Ctrl+S" Click="SaveAnalysisMenuItem_OnClick" />-->
+                <MenuItem Header="Ukončit" Click="ExitMenuItem_OnClick" />
+            </MenuItem>
+
+            <MenuItem x:Name="DataMenu" Header="Data">
+                <!--<MenuItem Header="Load data" InputGestureText="F6" Click="LoadDataMenuItem_OnClick" />-->
+                <MenuItem Header="Aktualizovat seznam děl" InputGestureText="F5" Click="RefreshMenuItem_OnClick" />
+                <MenuItem Header="---" IsEnabled="True"/>
+                <MenuItem Header="Uložit do CSV..." Click="SaveDataToCsvMenuItem_OnClick" />
+                <MenuItem Header="Uložit do schránky" Click="CopyDataToClipboardMenuItem_OnClick" />
+                <!--<MenuItem Header="- - -" IsEnabled="True"/>-->
+                <!--<MenuItem Header="Save graph as image..." Click="SaveGraphToImageMenuItem_OnClick" />-->
+            </MenuItem>
+            
+            <MenuItem x:Name="LookupsMenu" Header="Číselníky">
+                <MenuItem Header="Spravovat číselníky..." Click="ManageLookupsMenuItem_OnClick" />
+            </MenuItem>
+        </Menu>
+
+        <!-- Filter děl -->
+        <Expander Grid.Row="1" IsExpanded="True">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Koupeno (od/do)"/>
+                <controls:EzpDateTimePicker x:Name="_koupenoOd" Grid.Row="0" Grid.Column="1" Margin="1" ShowUseSelectedCheckBox="True" UseSelected="{Binding Filter.UseKoupenoOd, ElementName=_form, Mode=TwoWay}" VerticalAlignment="Center" Mode="Minimum" Value="{Binding Filter.KoupenoOdUi, ElementName=_form, Mode=TwoWay}" Format="Custom" FormatString="{x:Static Core:Culture.DateFormat}" HorizontalAlignment="Stretch" LostFocus="KoupenoOdOnLostFocus" />
+                <controls:EzpDateTimePicker x:Name="_koupenoDo" Grid.Row="0" Grid.Column="2" Margin="1" ShowUseSelectedCheckBox="True" UseSelected="{Binding Filter.UseKoupenoDo, ElementName=_form, Mode=TwoWay}" VerticalAlignment="Center" Mode="Maximum" Value="{Binding Filter.KoupenoDoUi, ElementName=_form, Mode=TwoWay}" Format="Custom" FormatString="{x:Static Core:Culture.DateFormat}" HorizontalAlignment="Stretch" LostFocus="KoupenoDoOnLostFocus" />
+
+                <!--<Label Grid.Row="1" Grid.Column="0" Margin="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Prodáno (od/do)"/>
+                <controls:EzpDateTimePicker x:Name="_prodanoOd" Grid.Row="1" Grid.Column="1" Margin="1" ShowUseSelectedCheckBox="True" UseSelected="{Binding Filter.UseProdanoOd, ElementName=_form, Mode=TwoWay}" VerticalAlignment="Center" Mode="Minimum" Value="{Binding Filter.ProdanoOdUi, ElementName=_form, Mode=TwoWay}" Format="Custom" FormatString="{x:Static Core:Culture.DateFormat}" HorizontalAlignment="Stretch" LostFocus="ProdanoOdOnLostFocus" />
+                <controls:EzpDateTimePicker x:Name="_prodanoDo" Grid.Row="1" Grid.Column="2" Margin="1" ShowUseSelectedCheckBox="True" UseSelected="{Binding Filter.UseProdanoDo, ElementName=_form, Mode=TwoWay}" VerticalAlignment="Center" Mode="Maximum" Value="{Binding Filter.ProdanoDoUi, ElementName=_form, Mode=TwoWay}" Format="Custom" FormatString="{x:Static Core:Culture.DateFormat}" HorizontalAlignment="Stretch" LostFocus="ProdanoDoOnLostFocus" />-->
+
+                <Label Grid.Row="1" Grid.Column="0" Margin="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Skladem"/>
+                <ComboBox
+                    Grid.Row="1" Grid.Column="1" Margin="1"
+                    x:Name="SklademComboBox"
+                    SelectionChanged="SklademComboBox_SelectionChanged">
+
+                    <ComboBoxItem Tag="-1" Content="vše" IsSelected="True" />
+                    <ComboBoxItem Tag="0" Content="nejsou skladem" />
+                    <ComboBoxItem Tag="1" Content="skladem" />
+                </ComboBox>
+
+                <Label Grid.Row="2" Grid.Column="0" Margin="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Prodáno"/>
+                <ComboBox
+                    Grid.Row="2" Grid.Column="1" Margin="1"
+                    x:Name="ProdanoComboBox"
+                    SelectionChanged="ProdanoComboBox_SelectionChanged">
+
+                    <ComboBoxItem Tag="-1" Content="vše" IsSelected="True" />
+                    <ComboBoxItem Tag="0" Content="neprodané" />
+                    <ComboBoxItem Tag="1" Content="prodané" />
+                </ComboBox>
+                
+                <Label Grid.Row="3" Grid.Column="0" Margin="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Autor"/>
+                <StackPanel Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <controls:SingleSelect 
+                        Margin="1" 
+                        Width="260"
+                        x:Name="_autorSingleSelect" 
+                        DisplayMemberPath="Name" 
+                        SelectedValuePath="Id" 
+                        SelectedValue="{Binding Path=AutorId, Mode=TwoWay, TargetNullValue={x:Static BusinessObjects:Autor.OptionalValue}}" 
+                        VerticalContentAlignment="Center" />
+                    <Button 
+                        Margin="1" 
+                        Width="30" 
+                        FontWeight="ExtraBold" 
+                        Content="+"
+                        ToolTip="Přidat autora"
+                        Click="AddAutor_OnClick"/>
+                </StackPanel>
+
+            </Grid>
+        </Expander>
+        
+        <DataGrid 
+            x:Name="DiloDataGrid"
+            Grid.Row="2"
+            AutoGenerateColumns="False" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch"
+            HorizontalScrollBarVisibility="Visible"
+            VerticalScrollBarVisibility="Visible"
+            IsReadOnly="True" 
+            SelectionChanged="DataGrid_SelectionChanged"
+            MouseDoubleClick="DataGrid_MouseDoubleClick">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" Visibility="Hidden" />
+
+                <DataGridTextColumn Header="Koupeno kdy" Binding="{Binding Path=Koupeno, StringFormat={x:Static Core:Culture.DateFormat}}" />
+                <DataGridTextColumn Header="Kupní cena" Binding="{Binding Path=NakupCena, StringFormat={x:Static Core:Culture.GroupedZeroesNumberFormat}}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Kupní měna" Binding="{Binding Path=NakupMenaNazev}" />
+                <DataGridTextColumn Header="Koupeno v" Binding="{Binding Path=KoupenoKdeNazev}" />
+
+                <!--<DataGridTextColumn Header="Prodáno kdy" Binding="{Binding Path=ProdanoKdy}" />
+                <DataGridTextColumn Header="Prodejní cena" Binding="{Binding Path=ProdejCena, StringFormat={x:Static Core:Culture.MediumZeroesNumberFormat}}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Prodejní měna" Binding="{Binding Path=ProdejMenaNazev}" />
+                <DataGridTextColumn Header="Prodáno v" Binding="{Binding Path=ProdanoKdeNazev}" />-->
+
+                <DataGridTextColumn Header="Jméno autora" Binding="{Binding Path=AutorJmeno}" />
+                <DataGridTextColumn Header="Příjmení autora" Binding="{Binding Path=AutorPrijmeni}" />
+
+                <DataGridTextColumn Header="Název díla" Binding="{Binding Path=Nazev}" />
+                <DataGridTextColumn Header="Rok vytvoření" Binding="{Binding Path=DiloRok}" />
+                <DataGridTextColumn Header="Typ díla" Binding="{Binding Path=TypDilaNazev}" />
+                <DataGridTextColumn Header="Technika" Binding="{Binding Path=TechnikaNazev}" />
+                <DataGridTextColumn Header="Rozměr" Binding="{Binding Path=Rozmer}" />
+                <DataGridTextColumn Header="Skladem" Binding="{Binding Path=Skladem, Converter={StaticResource BoolToStringConverter}}" />
+                <DataGridTextColumn Header="Prodáno" Binding="{Binding Path=Prodano, Converter={StaticResource BoolToStringConverter}}" />
+
+                <!--<DataGridTextColumn Header="Majitel #1 Jméno" Binding="{Binding Path=Majitel1Jmeno}" />
+                <DataGridTextColumn Header="Majitel #1 Příjmení" Binding="{Binding Path=Majitel1Prijmeni}" />
+                <DataGridTextColumn Header="Majitel #2 Jméno" Binding="{Binding Path=Majitel2Jmeno}" />
+                <DataGridTextColumn Header="Majitel #2 Příjmení" Binding="{Binding Path=Majitel2Prijmeni}" />-->
+
+                <DataGridTextColumn Header="Umístění" Binding="{Binding Path=UmisteniNazev}" />
+                
+                <!--<DataGridTextColumn Header="Date" Binding="{Binding Path=PriceDate, StringFormat={x:Static Core:Culture.DateTimeFormat}}" />-->
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Button Content="+" Width="30" Margin="10" Background="DarkSeaGreen" Foreground="WhiteSmoke" FontWeight="Bold" ToolTip="Přidat..." Click="AddButton_Click"/>
+                <Button Content="..." Width="30" Margin="10" Background="DeepSkyBlue" Foreground="WhiteSmoke" FontWeight="Bold" ToolTip="Upravit..." Click="EditButton_Click"/>
+                <Button Content="-" Width="30" Margin="10" Background="PaleVioletRed" Foreground="WhiteSmoke" FontWeight="Bold" ToolTip="Smazat označené..." Click="DeleteButton_Click"/>
+            </StackPanel>
+
+            <Button Grid.Column="1" Content="Aktualizovat" Width="100" HorizontalAlignment="Right" Margin="10" Click="UpdateButton_Click"/>
+        </Grid>
+
+    </Grid>
+</Window>
+
+
+

@@ -1,0 +1,3 @@
+Id:19
+Nazev:CNY
+Popis:Chinese yuan ren

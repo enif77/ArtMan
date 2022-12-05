@@ -1,0 +1,3 @@
+Id:17
+Nazev:BRL
+Popis:Brazilian real

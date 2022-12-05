@@ -1,0 +1,10 @@
+Jmeno:Emil
+Prijmeni:Holub
+WebURL:
+WikipediaURL:
+Telefon:666
+Adresa:
+Email:
+Popis:Tyvole
+ResourcesDir:
+Id:1

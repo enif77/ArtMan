@@ -1,0 +1,3 @@
+Nazev:-
+Popis:
+Id:0

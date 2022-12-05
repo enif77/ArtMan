@@ -1,0 +1,3 @@
+Id:25
+Nazev:MXN
+Popis:Mexican peso

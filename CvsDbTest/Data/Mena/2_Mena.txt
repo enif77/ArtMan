@@ -1,0 +1,3 @@
+Nazev:EUR
+Popis:Euro
+Id:2

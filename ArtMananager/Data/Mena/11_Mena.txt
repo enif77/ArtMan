@@ -1,0 +1,3 @@
+Id:11
+Nazev:CHF
+Popis:Swiss franc

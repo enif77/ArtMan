@@ -1,0 +1,3 @@
+Nazev:Trezor
+Popis:
+Id:1

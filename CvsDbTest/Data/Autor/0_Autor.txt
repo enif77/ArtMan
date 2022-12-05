@@ -1,0 +1,10 @@
+﻿Jmeno:-
+Prijmeni:
+WebURL:
+WikipediaURL:
+Telefon:
+Adresa:
+Email:
+Popis:
+ResourcesDir:
+Id:0

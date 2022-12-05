@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Grid="clr-namespace:ArtMan.Forms.Controls">
+
+    <SolidColorBrush x:Key="ChangedColorBrush" Color="#ffc" />
+    
+    <Style TargetType="{x:Type Grid:EzpCheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+        <Style.Triggers>
+            <Trigger Property="IsValueChanged" Value="true">
+                <Setter Property="Background" Value="{StaticResource ChangedColorBrush}"/>
+            </Trigger>
+            <Trigger Property="IsValueChanged" Value="false">
+                <!-- Empty trigger returns original values/background. -->
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

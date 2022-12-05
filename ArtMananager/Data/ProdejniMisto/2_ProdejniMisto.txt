@@ -1,0 +1,8 @@
+Id:2
+Nazev:Christie's
+Popis:
+Telefon:
+Adresa:
+Email:
+WebURL:
+Poznamka:

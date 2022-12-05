@@ -1,0 +1,3 @@
+Nazev:Skica
+Popis:awdwad
+Id:3

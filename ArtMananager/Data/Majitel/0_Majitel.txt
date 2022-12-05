@@ -1,0 +1,7 @@
+﻿Jmeno:-
+Prijmeni:
+Telefon:
+Adresa:
+Email:
+Poznamka:
+Id:0

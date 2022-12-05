@@ -1,0 +1,3 @@
+Nazev:Plastika
+Popis:awdwa
+Id:2

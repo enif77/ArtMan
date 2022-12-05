@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:Converters="clr-namespace:ArtMan.Forms.Converters">
+    
+    <!--<Converters:NotEmptyConverter x:Key="NotEmptyConverter" />
+    <Converters:NotNullConverter x:Key="NotNullConverter" />
+    <Converters:DatesConverter x:Key="DatesConverter" />
+    <Converters:ReadonlyInternalCodeConverter x:Key="ReadonlyInternalCodeConverter" />
+    <Converters:ReadonlyInternalCodeBackgroundConverter x:Key="ReadonlyInternalCodeBackgroundConverter" />
+    <Converters:InvertedBooleanConverter x:Key="InvertedBooleanConverter" />
+    <Converters:InvertedNullableBooleanConverter x:Key="InvertedNullableBooleanConverter" />
+    <Converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />-->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <!--<Converters:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
+    <Converters:CollectionNotEmptyToVisibilityConverter x:Key="CollectionNotEmptyToVisibilityConverter" />
+    <Converters:IsNullConverter x:Key="IsNullConverter" />
+
+    <Converters:IsEntityNewConverter x:Key="IsEntityNewConverter" />
+    <Converters:AreAllTrueMultiValueConverter x:Key="AreAllTrueMultiValueConverter" />
+ 
+    <Converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeightConverter" />-->
+</ResourceDictionary>

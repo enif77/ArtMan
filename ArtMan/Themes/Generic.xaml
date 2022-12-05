@@ -1,0 +1,29 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <!--<ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/AMainWindow.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/CheckBoxList.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/CheckBoxListHorizontal.xaml"></ResourceDictionary>-->
+                
+        <!--<ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/EzpExtendedGrid.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/EzpExtendedGridCheckBox.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/EzpVirtualizingGrid.xaml"></ResourceDictionary>-->
+
+        <!--<ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/EzpLabel.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/EzpTextBox.xaml"></ResourceDictionary>-->
+        <!--<ResourceDictionary Source="pack://application:,,,/ArtMan;component/Themes/EzpCheckBox.xaml"></ResourceDictionary>-->
+        <!--<ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/EzpComboBox.xaml"></ResourceDictionary>-->
+        <ResourceDictionary Source="pack://application:,,,/ArtMan;component/Themes/DecimalBox.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/ArtMan;component/Themes/IntegerBox.xaml"></ResourceDictionary>
+        <!--<ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/EzpWatermarkTextBox.xaml"></ResourceDictionary>-->
+
+        <!--<ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/BottomPanel.xaml"></ResourceDictionary>-->
+        <ResourceDictionary Source="pack://application:,,,/ArtMan;component/Themes/SingleSelect.xaml"></ResourceDictionary>
+        <!--<ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/MultiSelect.xaml"></ResourceDictionary>-->
+
+        <ResourceDictionary Source="pack://application:,,,/ArtMan;component/Themes/EzpDateTimePicker.xaml"></ResourceDictionary>
+
+        <!--<ResourceDictionary Source="pack://application:,,,/Ezpada.Controls;component/Themes/EzpTimePicker.xaml"></ResourceDictionary>-->
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

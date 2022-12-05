@@ -1,0 +1,3 @@
+Id:22
+Nazev:ILS
+Popis:Israeli shekel

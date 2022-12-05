@@ -1,0 +1,3 @@
+Id:10
+Nazev:SEK
+Popis:Swedish krone

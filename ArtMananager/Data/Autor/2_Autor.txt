@@ -1,0 +1,10 @@
+Jmeno:Jan
+Prijmeni:Kramář
+WebURL:
+WikipediaURL:
+Telefon:
+Adresa:
+Email:
+Popis:
+ResourcesDir:
+Id:2

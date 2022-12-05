@@ -1,0 +1,3 @@
+Id:27
+Nazev:NZD
+Popis:New Zealand dollar

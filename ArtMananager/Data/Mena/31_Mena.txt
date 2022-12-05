@@ -1,0 +1,3 @@
+Id:31
+Nazev:ZAR
+Popis:South African rand

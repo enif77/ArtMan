@@ -1,0 +1,7 @@
+Jmeno:Majitel
+Prijmeni:Majitelovič
+Telefon:tele
+Adresa:adre
+Email:male
+Poznamka:koko
+Id:1

@@ -1,0 +1,3 @@
+Id:14
+Nazev:RUB
+Popis:Russian rouble

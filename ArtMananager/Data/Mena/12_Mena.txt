@@ -1,0 +1,3 @@
+Id:12
+Nazev:NOK
+Popis:Norwegian krone

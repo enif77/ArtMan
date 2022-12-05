@@ -1,0 +1,10 @@
+Jmeno:Karel
+Prijmeni:Emil
+WebURL:
+WikipediaURL:
+Telefon:666
+Adresa:
+Email:
+Popis:
+ResourcesDir:
+Id:2

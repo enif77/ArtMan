@@ -1,0 +1,242 @@
+﻿<Window x:Class="ArtMan.Forms.AutorEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArtMan.Forms"
+        xmlns:Core="clr-namespace:ArtMan.Core"
+        mc:Ignorable="d"
+        Title="ArtMan - Nový autor" Height="480" Width="800" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <HierarchicalDataTemplate 
+            DataType="{x:Type Core:DirectoryItem}"
+            ItemsSource="{Binding Items}">
+
+            <TextBlock Text="{Binding Path=Name}" ToolTip="{Binding Path=Path}" />
+        </HierarchicalDataTemplate>
+
+        <DataTemplate 
+            DataType="{x:Type Core:FileItem}">
+
+            <TextBlock Text="{Binding Path=Name}" ToolTip="{Binding Path=Path}" />
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+       <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="380" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>    
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Column="0" Grid.Row="0" Margin="1" Content="Jméno" />
+        <TextBox 
+            Grid.Column="1" 
+            Grid.Row="0" 
+            Margin="1"
+            Text="{Binding Path=Jmeno, Mode=TwoWay}"/>
+        
+        <Label Grid.Column="0" Grid.Row="1" Margin="1" Content="Příjmení" />
+        <TextBox 
+            Grid.Column="1" 
+            Grid.Row="1" 
+            Margin="1"
+            Text="{Binding Path=Prijmeni, Mode=TwoWay}"/>
+
+        <Label Grid.Column="0" Grid.Row="2" Margin="1" Content="Telefon" />
+        <TextBox 
+            Grid.Column="1" 
+            Grid.Row="2" 
+            Margin="1"
+            Text="{Binding Path=Telefon, Mode=TwoWay}"/>
+
+        <Label Grid.Column="0" Grid.Row="3" Margin="1" Content="Adresa" />
+        <TextBox 
+            Grid.Column="1" 
+            Grid.Row="3" 
+            Margin="1"
+            Text="{Binding Path=Adresa, Mode=TwoWay}"/>
+
+        <Label Grid.Column="0" Grid.Row="4" Margin="1" Content="Email" />
+        <TextBox 
+            Grid.Column="1" 
+            Grid.Row="4" 
+            Margin="1"
+            Text="{Binding Path=Email, Mode=TwoWay}"/>
+
+        <Label Grid.Column="0" Grid.Row="5" Margin="1" Content="WEB" />
+        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <TextBox 
+                Margin="1"
+                Width="300"
+                Text="{Binding Path=WebUrl, Mode=TwoWay}"/>
+            <Button 
+                Margin="1" 
+                Width="30" 
+                FontWeight="ExtraBold" 
+                Content="..."
+                ToolTip="Zobrazit v prohlížeči"
+                Click="ShowWeb_OnClick"/>
+        </StackPanel>
+        
+        <Label Grid.Column="0" Grid.Row="6" Margin="1" Content="Wikipedia" />
+        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <TextBox 
+                Margin="1"
+                Width="300"
+                Text="{Binding Path=WikipediaUrl, Mode=TwoWay}"/>
+            <Button 
+                Margin="1" 
+                Width="30" 
+                FontWeight="ExtraBold" 
+                Content="..."
+                ToolTip="Zobrazit v prohlížeči"
+                Click="ShowWiki_OnClick"/>
+        </StackPanel>
+
+        <Label Grid.Column="0" Grid.Row="7" Margin="1" Content="Popis" />
+        <TextBox 
+            Grid.Column="1" 
+            Grid.Row="7" 
+            Margin="1"
+            MinLines="5"
+            MaxLines="5"
+            AcceptsReturn="True"
+            Text="{Binding Path=Popis, Mode=TwoWay}"/>
+
+        <GroupBox
+            Grid.Column="3"
+            Grid.Row="0"
+            Grid.RowSpan="12"
+            Header="Dokumnety">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <TextBox Margin="1, 4, 1, 1" Width="190" VerticalAlignment="Top" ToolTip="Dokumenty uloženy v adresáři..." Text="{Binding Path=ResourcesDir, Mode=TwoWay}"/>
+                    <Button Margin="1, 4, 1, 1" Width="30" VerticalAlignment="Top" FontWeight="ExtraBold" Content="..." ToolTip="Zobrazit adresář s dokumenty" Click="ShowResourcesDir_OnClick"/>
+                    <Button Margin="4, 4, 1, 1" Width="30" VerticalAlignment="Top" FontWeight="ExtraBold" Content="+" ToolTip="Vybrat adresář s dokumenty" Click="SetResourcesDir_OnClick"/>
+                </StackPanel>
+
+                <TabControl Grid.Row="2">
+                    <TabItem Header="Náhled">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image Grid.Row="0" Margin="1" x:Name="_previewImage" Width="200" Height="200" />
+                            <Label Grid.Row="2" Content="&lt;Dokumenty&gt;\Thumbnail.jpg" FontStyle="Italic" IsEnabled="False"/>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Popis">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBox
+                                x:Name="_previewReadmeTextBox" 
+                                Grid.Row="0"
+                                Margin="1"
+                                MinLines="15"
+                                IsReadOnly="True" 
+                                HorizontalScrollBarVisibility="Auto" 
+                                VerticalScrollBarVisibility="Auto"
+                                VerticalAlignment="Stretch"
+                                FontFamily="Courier New" FontSize="12" />
+                            <Label Grid.Row="2" Content="&lt;Dokumenty&gt;\Readme.txt" FontStyle="Italic" IsEnabled="False"/>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Soubory">
+                        <Grid 
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TreeView
+                                Grid.Row="0"
+                                x:Name="AdresareTreeView"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Width="Auto"
+                                Height="280">
+
+                                <TreeView.ItemContainerStyle>
+                                    <Style TargetType="{x:Type TreeViewItem}">
+                                        <EventSetter Event="MouseDoubleClick" Handler="AdresareTreeView_OnItemMouseDoubleClick" />
+                                    </Style>
+                                </TreeView.ItemContainerStyle>
+                            </TreeView>
+                        </Grid>
+                    </TabItem>
+
+                </TabControl>
+
+                <Button Grid.Row="6" Width="100" HorizontalAlignment="Right" Margin="4" Content="Obnovit náhled" Click="RefreshPreviewButton_OnClick"/>
+            </Grid>
+        </GroupBox>
+
+        <StackPanel 
+            Grid.Column="1" Grid.Row="11" 
+            Orientation="Horizontal" 
+            Height="26"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            
+            <Button 
+                Margin="1" 
+                Width="100" 
+                Background="DarkSeaGreen" 
+                Foreground="WhiteSmoke" 
+                FontWeight="ExtraBold" 
+                Content="Uložit"
+                Click="Save_OnClick"/>
+            
+            <Button 
+                Margin="10, 1, 20, 1" 
+                Width="100" 
+                Foreground="Red" 
+                Content="Zrušit"
+                Click="Cancel_OnClick"/>
+        </StackPanel>
+    </Grid>
+</Window>

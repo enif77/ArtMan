@@ -1,0 +1,3 @@
+Nazev:Obraz
+Popis:
+Id:1

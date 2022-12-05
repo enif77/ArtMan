@@ -1,0 +1,22 @@
+--- BEGIN PAGE TEMPLATE ---
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autoři</title>
+</head>    
+
+<body style="background: gray">
+<h1>Přehled autorů a jejich děl</h1>
+${authors-list}
+</body>
+</html>
+--- END PAGE TEMPLATE ---
+
+--- BEGIN AUTHOR TEMPLATE ---
+<h2>${author-name}</h2>
+<p>${images-list}</p>
+--- END AUTHOR TEMPLATE ---
+
+--- BEGIN IMAGE TEMPLATE ---
+<img src="${image-path}" alt="${image-alt}" height="${image-height}" width="${image-width}">
+--- END IMAGE TEMPLATE ---

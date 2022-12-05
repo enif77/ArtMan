@@ -1,0 +1,8 @@
+Nazev:Praha
+Popis:Někde v praze
+Telefon:
+Adresa:
+Email:
+WebURL:
+Poznamka:
+Id:1

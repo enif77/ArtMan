@@ -1,0 +1,3 @@
+Id:13
+Nazev:HRK
+Popis:Croatian kuna

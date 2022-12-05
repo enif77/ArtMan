@@ -1,0 +1,3 @@
+Id:20
+Nazev:HKD
+Popis:Hong Kong dollar

@@ -1,0 +1,3 @@
+Nazev:Výstava
+Popis:awdad
+Id:2

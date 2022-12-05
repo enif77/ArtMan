@@ -1,0 +1,3 @@
+Id:9
+Nazev:RON
+Popis:Romanian leu

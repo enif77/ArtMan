@@ -1,0 +1,143 @@
+﻿<Window x:Class="ArtMananager.Forms.ProdanoInformaceEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArtMananager.Forms"
+        xmlns:BusinessObjects="clr-namespace:ArtMananager.DataObjects"
+        xmlns:Core="clr-namespace:ArtMananager.Core"
+        xmlns:controls="clr-namespace:ArtMananager.Forms.Controls"
+        xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        mc:Ignorable="d"
+        MouseDown="ProdanoInformaceEditor_OnMouseDown"
+        Title="Art Manager - Informace o prodeji díla" Height="200" Width="520" ResizeMode="NoResize">
+    
+    <Grid>
+       <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>    
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Margin="1" Content="Prodáno kdy" />
+        <!--<controls:EzpDateTimePicker x:Name="_prodano" Grid.Row="0" Grid.Column="1" Margin="1" VerticalAlignment="Center" Mode="Mandatory" Value="{Binding Path=ProdanoKdy, Mode=TwoWay}" Format="Custom" FormatString="{x:Static Core:Culture.DateFormat}" Width="120" HorizontalAlignment="Left" />-->
+        <!--<WindowsFormsHost
+            Grid.Row="0" Grid.Column="1"
+            Margin="1"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left">
+
+            <forms:DateTimePicker x:Name="_prodano" Format="Custom" CustomFormat="{x:Static Core:Culture.DateFormat}" Width="120" />
+        </WindowsFormsHost>-->
+        <DatePicker x:Name="_prodano" Grid.Row="0" Grid.Column="1" Margin="1" VerticalAlignment="Center" SelectedDate="{Binding Path=ProdanoKdy, Mode=TwoWay}" SelectedDateFormat="Short" Width="120" HorizontalAlignment="Left" />
+        
+        <Label Grid.Row="1" Grid.Column="0" Margin="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Prodejní cena"/>
+        <controls:DecimalBox 
+            x:Name="_prodejCena" 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="1" 
+            AllowEmpty="True" 
+            Width="150" 
+            VerticalAlignment="Center" 
+            Text="{Binding Path=ProdejCena, Mode=TwoWay}" 
+            HorizontalAlignment="Left"
+            Visibility="Hidden"
+            LostFocus="_prodejCena_OnLostFocus"/>
+        <TextBox 
+            x:Name="_prodejCenaView" 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            Margin="1" 
+            IsReadOnly="True" 
+            Width="150" 
+            VerticalAlignment="Center" 
+            HorizontalContentAlignment="Right"
+            Text="{Binding Path=ProdejCena, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat={x:Static Core:Culture.GroupedWholeNumberFormat}}" 
+            HorizontalAlignment="Left"
+            GotFocus="_prodejCenaView_OnGotFocus"/>
+
+        <Label Grid.Column="0" Grid.Row="2" Margin="1" Content="Prodejní měna" />
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <controls:SingleSelect 
+                Margin="1"
+                Width="300"
+                x:Name="_prodejMenaSingleSelect" 
+                DisplayMemberPath="Name" 
+                SelectedValuePath="Id" 
+                SelectedValue="{Binding Path=ProdejMenaId, Mode=TwoWay, TargetNullValue={x:Static BusinessObjects:Mena.OptionalValue}}" 
+                VerticalContentAlignment="Center" />
+            <Button 
+                Margin="1" 
+                Width="30" 
+                FontWeight="ExtraBold" 
+                Content="..."
+                ToolTip="Zobrazit nebo upravit měnu"
+                Click="EditMena_OnClick"/>
+            <Button 
+                Margin="1" 
+                Width="30" 
+                FontWeight="ExtraBold" 
+                Content="+"
+                ToolTip="Přidat měnu"
+                Click="AddMena_OnClick"/>
+        </StackPanel>
+        
+        <Label Grid.Column="0" Grid.Row="3" Margin="1" Content="Prodáno kde" />
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <controls:SingleSelect 
+                Margin="1" 
+                Width="300"
+                x:Name="_prodanoKdeSingleSelect" 
+                DisplayMemberPath="Name" 
+                SelectedValuePath="Id" 
+                SelectedValue="{Binding Path=ProdanoKdeId, Mode=TwoWay, TargetNullValue={x:Static BusinessObjects:ProdejniMisto.OptionalValue}}" 
+                VerticalContentAlignment="Center" />
+            <Button 
+                Margin="1" 
+                Width="30" 
+                FontWeight="ExtraBold" 
+                Content="..."
+                ToolTip="Zobrazit nebo upravit prodejní místo"
+                Click="EditProdejniMisto_OnClick"/>
+            <Button 
+                Margin="1" 
+                Width="30" 
+                FontWeight="ExtraBold" 
+                Content="+"
+                ToolTip="Přidat prodejní místo"
+                Click="AddProdejniMisto_OnClick"/>
+        </StackPanel>
+
+        <StackPanel 
+            Grid.Column="1" Grid.Row="5" 
+            Orientation="Horizontal" 
+            HorizontalAlignment="Right">
+            
+            <Button 
+                Margin="1" 
+                Width="100" 
+                Background="DarkSeaGreen" 
+                Foreground="WhiteSmoke" 
+                FontWeight="ExtraBold" 
+                Content="Uložit"
+                Click="Save_OnClick"/>
+            
+            <Button 
+                Margin="10, 1, 20, 1" 
+                Width="100" 
+                Foreground="Red" 
+                Content="Zrušit"
+                Click="Cancel_OnClick"/>
+        </StackPanel>
+    </Grid>
+</Window>

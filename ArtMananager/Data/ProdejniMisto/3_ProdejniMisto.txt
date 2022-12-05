@@ -1,0 +1,8 @@
+Id:3
+Nazev:Bonhams
+Popis:Jebat
+Telefon:
+Adresa:
+Email:
+WebURL:
+Poznamka:Křečky

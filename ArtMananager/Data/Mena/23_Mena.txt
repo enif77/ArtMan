@@ -1,0 +1,3 @@
+Id:23
+Nazev:INR
+Popis:Indian rupee

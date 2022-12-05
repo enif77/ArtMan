@@ -1,0 +1,3 @@
+Id:24
+Nazev:KRW
+Popis:South Korean won

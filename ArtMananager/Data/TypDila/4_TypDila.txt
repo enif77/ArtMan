@@ -1,0 +1,3 @@
+Id:4
+Nazev:Odlitek
+Popis:
